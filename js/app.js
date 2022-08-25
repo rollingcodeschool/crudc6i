@@ -64,6 +64,8 @@ function crearPelicula(e){
     guardarDatosEnLS();
     //limpiar el formulario
     limpiarFormulario();
+    //dibujar esta peli en la tabla
+    crearFila(nuevaPelicula)
     //cerrar la ventana modal
     modalFormPelicula.hide();
 }

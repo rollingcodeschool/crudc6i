@@ -41,6 +41,9 @@ function crearPelicula(e){
 function limpiarFormulario(){
     formulario.reset();
     //resetear la clase de bootstrap form-control
+    titulo.className = 'form-control'
+    descripcion.className = 'form-control'
+    imagen.className = 'form-control'
 }
 
 function guardarDatosEnLS(){

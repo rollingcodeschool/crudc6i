@@ -27,7 +27,6 @@ function cargaInicial(){
 }
 
 function crearFila(pelicula){
-    console.log(pelicula)
     let tablaPelicula = document.querySelector('#tablaPelicula');
     tablaPelicula.innerHTML +=`<tr>
     <th scope="row">${pelicula.codigo}</th>
@@ -39,7 +38,7 @@ function crearFila(pelicula){
       <button class="btn btn-warning" >
         <i class="bi bi-pencil-square"></i>
       </button>
-      <button class="btn btn-danger">
+      <button class="btn btn-danger" onclick="borrarPelicula('${pelicula.codigo}')">
         <i class="bi bi-x-square"></i>
       </button>
     </td>
@@ -86,4 +85,19 @@ function limpiarFormulario(){
 
 function guardarDatosEnLS(){
     localStorage.setItem('listaPeliculasKey', JSON.stringify(listaPeliculas))
+}
+
+
+window.borrarPelicula = function (codigo){
+    console.log(codigo)
+    //buscar en el listaPeliculas el codigo de la peli que quiero borrar
+    //Opcion1: findIndex, splice(posicion,1)
+    //Opcion2: filter
+
+    //tarea para la casa borrar del arreglo listaPeliculas el elemento del codigo recibido por parametro
+    console.log(listaPeliculas);
+
+    //actualizar el localstorage
+
+    //actualizar la tabla
 }

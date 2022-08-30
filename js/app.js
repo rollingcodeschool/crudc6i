@@ -81,6 +81,8 @@ function limpiarFormulario(){
     titulo.className = 'form-control'
     descripcion.className = 'form-control'
     imagen.className = 'form-control'
+    genero.className = 'form-control'
+    codigo.className = 'form-control'
 }
 
 function guardarDatosEnLS(){
@@ -93,11 +95,19 @@ window.borrarPelicula = function (codigo){
     //buscar en el listaPeliculas el codigo de la peli que quiero borrar
     //Opcion1: findIndex, splice(posicion,1)
     //Opcion2: filter
-
+    // let copiaListaPeliculas = listaPeliculas.filter((pelicula)=>{return pelicula.codigo != codigo});
+    let copiaListaPeliculas = listaPeliculas.filter((pelicula)=> pelicula.codigo != codigo ); //return implicito
+    console.log(copiaListaPeliculas)
     //tarea para la casa borrar del arreglo listaPeliculas el elemento del codigo recibido por parametro
-    console.log(listaPeliculas);
-
+    listaPeliculas = copiaListaPeliculas;
     //actualizar el localstorage
-
+    guardarDatosEnLS();
     //actualizar la tabla
+    actualizarTabla();
+}
+
+function actualizarTabla(){
+  let tablaPelicula = document.querySelector('#tablaPelicula');
+  tablaPelicula.innerHTML='';
+  cargaInicial();
 }

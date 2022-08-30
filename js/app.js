@@ -14,6 +14,7 @@ let descripcion = document.querySelector("#descripcion");
 let imagen = document.querySelector("#imagen");
 let genero = document.querySelector("#genero");
 let formulario = document.querySelector("#formPelicula");
+let peliculaNueva = true; // si peliculaNueva es true entonces crear una peli, caso contrario actualizar una peli
 
 //agregar los eventos
 btnCrearPelicula.addEventListener("click", mostrarFormulario);
@@ -51,6 +52,7 @@ function crearFila(pelicula) {
 }
 
 function mostrarFormulario() {
+  peliculaNueva=true;
   modalFormPelicula.show();
   codigo.value = uuidv4();
 }
@@ -58,6 +60,14 @@ function mostrarFormulario() {
 function crearPelicula(e) {
   e.preventDefault();
   //agregar las validaciones necesarias
+  if (peliculaNueva) {
+    generarPelicula();
+  } else {
+    actualizarPelicula();
+  }
+}
+
+function generarPelicula() {
   //crear una pelicula
   const nuevaPelicula = new Pelicula(
     codigo.value,
@@ -127,7 +137,11 @@ window.borrarPelicula = function (codigo) {
       guardarDatosEnLS();
       //actualizar la tabla
       actualizarTabla();
-      Swal.fire("Pelicula eliminada", "La pelicula seleccionada se borro correctamente", "success");
+      Swal.fire(
+        "Pelicula eliminada",
+        "La pelicula seleccionada se borro correctamente",
+        "success"
+      );
     }
   });
 };
@@ -138,15 +152,30 @@ function actualizarTabla() {
   cargaInicial();
 }
 
-window.editarPelicula = function (codigoBuscado){
- //mostrar la ventana modal
+window.editarPelicula = function (codigoBuscado) {
+  peliculaNueva=false;
+  //mostrar la ventana modal
   modalFormPelicula.show();
- //buscar la pelicula que quiero mostrar en el formulario
-  let peliBuscada = listaPeliculas.find((pelicula)=> pelicula.codigo === codigoBuscado);
- //cargar el formulario con los datos
+  //buscar la pelicula que quiero mostrar en el formulario
+  let peliBuscada = listaPeliculas.find(
+    (pelicula) => pelicula.codigo === codigoBuscado
+  );
+  //cargar el formulario con los datos
   codigo.value = peliBuscada.codigo;
   titulo.value = peliBuscada.titulo;
   descripcion.value = peliBuscada.descripcion;
   imagen.value = peliBuscada.imagen;
   genero.value = peliBuscada.genero;
+};
+
+function actualizarPelicula() {
+  console.log("actualizando datos de la peli..");
+  //buscar la posicion de la pelicula que estoy editando en el arreglo de peliculas (codigo)
+
+  //actualizar todos los datos del objeto
+  listaPeliculas[0].titulo = titulo.value;
+
+  //actualizar el localstorage
+
+  //actualizar la tabla
 }

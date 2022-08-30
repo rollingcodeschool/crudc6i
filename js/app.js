@@ -40,7 +40,7 @@ function crearFila(pelicula) {
     <td>${pelicula.imagen}</td>
     <td>${pelicula.genero}</td>
     <td>
-      <button class="btn btn-warning" >
+      <button class="btn btn-warning" onclick="editarPelicula('${pelicula.codigo}')">
         <i class="bi bi-pencil-square"></i>
       </button>
       <button class="btn btn-danger" onclick="borrarPelicula('${pelicula.codigo}')">
@@ -136,4 +136,17 @@ function actualizarTabla() {
   let tablaPelicula = document.querySelector("#tablaPelicula");
   tablaPelicula.innerHTML = "";
   cargaInicial();
+}
+
+window.editarPelicula = function (codigoBuscado){
+ //mostrar la ventana modal
+  modalFormPelicula.show();
+ //buscar la pelicula que quiero mostrar en el formulario
+  let peliBuscada = listaPeliculas.find((pelicula)=> pelicula.codigo === codigoBuscado);
+ //cargar el formulario con los datos
+  codigo.value = peliBuscada.codigo;
+  titulo.value = peliBuscada.titulo;
+  descripcion.value = peliBuscada.descripcion;
+  imagen.value = peliBuscada.imagen;
+  genero.value = peliBuscada.genero;
 }

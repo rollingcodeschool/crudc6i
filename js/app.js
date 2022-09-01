@@ -53,6 +53,8 @@ function crearFila(pelicula) {
 
 function mostrarFormulario() {
   peliculaNueva = true;
+  //limpiar formulario
+  limpiarFormulario();
   modalFormPelicula.show();
   codigo.value = uuidv4();
 }
@@ -166,6 +168,7 @@ window.editarPelicula = function (codigoBuscado) {
   descripcion.value = peliBuscada.descripcion;
   imagen.value = peliBuscada.imagen;
   genero.value = peliBuscada.genero;
+
 };
 
 function actualizarPelicula() {
@@ -188,4 +191,6 @@ function actualizarPelicula() {
   actualizarTabla();
   //cerrar ventana modal
   modalFormPelicula.hide()
+  //limpie el formulario
+  limpiarFormulario();
 }

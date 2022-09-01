@@ -52,7 +52,7 @@ function crearFila(pelicula) {
 }
 
 function mostrarFormulario() {
-  peliculaNueva=true;
+  peliculaNueva = true;
   modalFormPelicula.show();
   codigo.value = uuidv4();
 }
@@ -153,7 +153,7 @@ function actualizarTabla() {
 }
 
 window.editarPelicula = function (codigoBuscado) {
-  peliculaNueva=false;
+  peliculaNueva = false;
   //mostrar la ventana modal
   modalFormPelicula.show();
   //buscar la pelicula que quiero mostrar en el formulario
@@ -171,11 +171,21 @@ window.editarPelicula = function (codigoBuscado) {
 function actualizarPelicula() {
   console.log("actualizando datos de la peli..");
   //buscar la posicion de la pelicula que estoy editando en el arreglo de peliculas (codigo)
+  // let posicionPelicula = listaPeliculas.findIndex((pelicula)=> {return pelicula.codigo === codigo.value}); //return implicito
+  let posicionPelicula = listaPeliculas.findIndex(
+    (pelicula) => pelicula.codigo === codigo.value
+  ); //return implicito
 
   //actualizar todos los datos del objeto
-  listaPeliculas[0].titulo = titulo.value;
+  listaPeliculas[posicionPelicula].titulo = titulo.value;
+  listaPeliculas[posicionPelicula].descripcion = descripcion.value;
+  listaPeliculas[posicionPelicula].imagen = imagen.value;
+  listaPeliculas[posicionPelicula].genero = genero.value;
 
   //actualizar el localstorage
-
+  guardarDatosEnLS();
   //actualizar la tabla
+  actualizarTabla();
+  //cerrar ventana modal
+  modalFormPelicula.hide()
 }
